@@ -1,17 +1,41 @@
-var express = require('express');
-var app = express();
-var cors=require('cors')
+'use strict'
+const express = require('express'),
+      logger = require('morgan'),
+
+      routes = require('./router/index'),
+
+      app = express()
+
 require('dotenv').config()
 
-const userRoutes=require('./router/user.js')
+app.use(require('cors')())
+app.use(logger('dev'))
 
-app.use(cors())
-app.use(express.urlencoded({extended:false}))
-app.use(express.json())
+app.use('/', routes);
 
-
-app.use('/users',userRoutes)
-
-app.listen(3000,function(){
-    console.log('listen at port 3000')
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
+
+if (app.get('env') === 'development') {
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500)
+    res.send({
+      message: err.message,
+      error: err
+    })
+  })
+}
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500)
+  res.send({
+    message: err.message,
+    error: {}
+  })
+})
+
+
+module.exports = app
