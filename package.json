@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "@google-cloud/storage": "^2.0.3",
+    "@google-cloud/storage": "^1.2.0",
     "axios": "^0.18.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
@@ -20,7 +20,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "author": "",
   "license": "ISC"
