@@ -27,7 +27,11 @@ var userSchema = new Schema({
     type:String,
     required:true,
     validate:passValidator
-  }
+  },
+  avatar: {
+    type: String
+  },
+  mymeme:[{type: Schema.Types.ObjectId, ref: 'Meme'}]  
 });
 
 userSchema.plugin(uniqueValidator)
