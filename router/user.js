@@ -27,7 +27,9 @@ router.post('/register',function(req,res){
 
 router.post('/login', function(req,res){
     let hashed = encrypt.hashPassword(req.body.password, req.body.email)
-
+    console.log(req.body.email)
+    console.log(req.body.password)
+    console.log(hashed)
     User.findOne({email: req.body.email, password: hashed})
         .then(user => {
             let obj = {
