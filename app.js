@@ -4,7 +4,8 @@ const express = require('express'),
       logger = require('morgan'),
 
       routes = require('./router/index'),
-      userroutes=require('./router/user')
+      userroutes=require('./router/user'),
+      memeRoutes = require('./router/meme')
 const app = express()
 
 require('dotenv').config()
@@ -15,6 +16,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.use('/', routes);
 app.use('/users',userroutes)
+app.use('/memes', memeRoutes)
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

@@ -18,7 +18,7 @@ module.exports = {
         User.findById(decoded.id)
           .then(user => {
             if (user) {
-              req.decoded = decoded
+              req.user = decoded
               next()
             } else {
               res.status(401).json({error: 'Please provide a valid token'})

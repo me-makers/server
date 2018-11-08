@@ -5,13 +5,13 @@ const uniqueValidator = require('mongoose-unique-validator');
 const encrypt = require('../helpers/encrypt')
 
 
-const passValidator = [
-  validate({
-      validator: 'isLength',
-      arguments: [6, 16],
-      message: 'Password should be between {ARGS[0]} and {ARGS[1]} characters',
-    })
-]
+// const passValidator = [
+//   validate({
+//       validator: 'isLength',
+//       arguments: [6, 16],
+//       message: 'Password should be between {ARGS[0]} and {ARGS[1]} characters',
+//     })
+// ]
 
 var userSchema = new Schema({
   name: {
@@ -25,16 +25,15 @@ var userSchema = new Schema({
   },
   password: {
     type:String,
-    required:true,
-    validate:passValidator
+    required:true
   },
   avatar: {
     type: String
   },
-  mymeme:[{type: Schema.Types.ObjectId, ref: 'Meme'}]  
+  memes:[{type: Schema.Types.ObjectId, ref: 'Meme'}]  
 });
 
-userSchema.plugin(uniqueValidator)
+// userSchema.plugin(uniqueValidator)
 
 userSchema.pre('save', function(next) {
   this.password = encrypt.hashPassword(this.password, this.email)

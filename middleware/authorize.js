@@ -1,4 +1,4 @@
-const Event = require('../models/event')
+
 
 module.exports = {
   isMe: (req, res, next) => {
