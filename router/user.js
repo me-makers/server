@@ -86,7 +86,7 @@ router.get('/memes', auth, function (req, res) {
             res.status(500).json(err)
         });
 })
-
+// 
 router.get('/profile', auth, function (req, res) {
     res.status(200).json(req.decoded)
 })
